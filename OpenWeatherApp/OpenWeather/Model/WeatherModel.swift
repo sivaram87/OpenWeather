@@ -11,13 +11,12 @@ struct WeatherModel {
     var cityName: String = ""
     var iconImage: String = ""
     var description: String = ""
-    //Test
+
     var temprature: Float = 0.0
     var pressure: Float = 0.0
     var humidity: Float = 0.0
     
     var windSpeed: Float = 0.0
-    
     var sunrise: Float = 0.0
     var sunset: Float = 0.0
     

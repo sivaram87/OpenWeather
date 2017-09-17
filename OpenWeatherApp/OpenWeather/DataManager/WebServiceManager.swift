@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 typealias weatherHandler = (_ object: WeatherModel?, _ error: VWError?) -> Void
-let teleportAPI = "https://api.teleport.org/api/cities/?search=XXX"
+
 class WebServiceManager {
     fileprivate let appId = "a8fe49884364d03a655e1fd715f27797"
     fileprivate let apiUrl = "http://api.openweathermap.org/data/2.5/weather"
@@ -49,33 +49,6 @@ class WebServiceManager {
         }
         retrieveWeatherURL(url: url, completionHandler: completionHandler)
     }
-    
-    static func getCitiList(text: String) {
-        let sessionConfig = URLSessionConfiguration.default
-        let session = URLSession(configuration: sessionConfig)
-        let url = teleportAPI.replacingOccurrences(of: "XXX", with: text)
-        let request = URLRequest(url: URL(string: url)!)
-        let task = session.dataTask(with: request,
-                                    completionHandler: { data, response, networkError in
-                                        if let _ = networkError {
-                                            print("Failed network \(response.debugDescription)")
-                                            return
-                                        }
-                                        
-                                        guard let data = data else {
-                                            print("Failed data \(response.debugDescription)")
-                                            return
-                                        }
-                                        if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                                            print(json)
-                                        } else {
-                                            print(data.debugDescription)
-                                        }
-        })
-        task.resume()
-
-    }
-    
     func retrieveWeatherURL(url: URL, completionHandler: @escaping weatherHandler) {
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
@@ -96,6 +69,7 @@ class WebServiceManager {
                                             return
                                         }
                                         if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                                            print(json.debugDescription)
                                             let model = WeatherModel(jsonData: json!)
                                             completionHandler(model, nil)
                                         } else {
