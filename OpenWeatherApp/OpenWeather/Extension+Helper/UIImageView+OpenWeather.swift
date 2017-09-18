@@ -9,6 +9,7 @@
 import UIKit
 extension UIImageView {
     
+    /// Helper method to fetch the image from server asyncronously and loads it on UI if ready
     func imageFromUrl(urlString: String, callback: ((_ wasAbleToLoadImage: Bool)->Void)? = nil) {
         guard let url = NSURL(string: urlString) else {
             return

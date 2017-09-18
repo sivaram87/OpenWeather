@@ -8,10 +8,13 @@
 
 import Foundation
 extension Float {
+    
+    /// Math fo convert kelvin to celsius
     func kelvinToCelsius() -> Float {
         return self - 273.15
     }
     
+    /// Math fo convert kelvin to Fahrenheit
     func kelvinToFahrenheit() -> Float {
         return self * 9 / 5 - 459.67
     }

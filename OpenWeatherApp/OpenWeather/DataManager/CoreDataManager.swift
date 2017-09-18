@@ -63,6 +63,10 @@ class CoreDataManager {
     
 
     // MARK: Cities Entity Operation
+    
+    /// Check if database loaded with data
+    /// If Yes do nothing
+    /// If No load all the data from the json
     func checkForCitiesDataLoad() -> Bool{
         let context = self.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: CitiesList.self))
@@ -76,6 +80,8 @@ class CoreDataManager {
         }
     }
     
+    
+    /// Loads the cities.json data to "citiesList" Entity
     func updateCities() {
         do {
             let data = try Data(contentsOf: Bundle.main.url(forResource: constant.citiesFileName, withExtension: constant.citiesFileType)!)
@@ -89,6 +95,7 @@ class CoreDataManager {
         }
     }
     
+    /// Inserting values to "citiesList" table
     func addCities(value: [String: Any]) {
         let context = self.persistentContainer.viewContext
         if let object: CitiesList = NSEntityDescription.insertNewObject(forEntityName: String(describing: CitiesList.self), into: context) as? CitiesList {

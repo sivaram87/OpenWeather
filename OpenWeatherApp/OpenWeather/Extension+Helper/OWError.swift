@@ -7,7 +7,7 @@
 //
 
 import Foundation
-enum VWError: Error {
+enum OWError: Error {
     case InvalidUrl
     case NetworkFailed(code: Int, description: String)
     case InvalidJson(code: Int, description: String)

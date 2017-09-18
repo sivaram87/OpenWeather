@@ -13,13 +13,10 @@ struct WeatherModel {
     var description: String = ""
 
     var temprature: Float = 0.0
-    var pressure: Float = 0.0
-    var humidity: Float = 0.0
-    
-    var windSpeed: Float = 0.0
     var sunrise: Float = 0.0
     var sunset: Float = 0.0
     
+    /// Initializer accepts the dictionary data and update itself
     init(jsonData: [String: Any]) {
         if let name = jsonData["name"] as? String {
             cityName = name
@@ -33,16 +30,8 @@ struct WeatherModel {
         }
         
         if let mainOption = jsonData["main"] as? [String: Float],
-            let temp = mainOption["temp"],
-            let pressure = mainOption["pressure"],
-            let humidity = mainOption["humidity"] {
+            let temp = mainOption["temp"] {
             self.temprature = temp
-            self.pressure = pressure
-            self.humidity = humidity
-        }
-        
-        if let wind = jsonData["wind"] as? [String: Float], let speed = wind["speed"] {
-            self.windSpeed = speed
         }
         
         if let Sys = jsonData["sys"] as? [String: AnyObject],

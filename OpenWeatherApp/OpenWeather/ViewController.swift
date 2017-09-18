@@ -20,9 +20,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var imgWeather: UIImageView!
     @IBOutlet weak var lblDescription: UILabel!
     
+    @IBOutlet weak var lblSunrise: UILabel!
+    @IBOutlet weak var lblSunset: UILabel!
     @IBOutlet weak var btnCelcius: UIButton!
     @IBOutlet weak var btnFarenheit: UIButton!
     
+    @IBOutlet weak var imgBackground: UIImageView!
     fileprivate let locationManager = CLLocationManager()
     
     var toggleCelcius: Bool = true {
@@ -41,6 +44,7 @@ class ViewController: UIViewController {
         
         btnSearchCity.layer.cornerRadius = 10
         //Invoke Location service for initial load
+        //  If user has choosen any cities previous load the weather for same
         if let city = UserDefaults.standard.value(forKey: constant.lastSearchedCityKey) as? String {
             self.updateWeather(city: city)
         } else {
@@ -51,6 +55,10 @@ class ViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

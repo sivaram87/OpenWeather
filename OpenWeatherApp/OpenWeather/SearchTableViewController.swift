@@ -23,15 +23,14 @@ class SearchTableViewController: UITableViewController {
         fetchRequest.predicate = NSPredicate(format: "cityName CONTAINS[C] %@", "")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: constant.cityName, ascending: true)]
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.sharedInstance.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        // frc.delegate = self
         return frc
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchBar.barTintColor = UIColor.black
-        searchController.searchBar.backgroundColor = UIColor.darkGray
-        self.tableView.backgroundColor = UIColor.darkGray
+        searchController.searchBar.backgroundColor = UIColor.black
+        self.tableView.backgroundColor = UIColor.black
         searchController.searchBar.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.tintColor = UIColor.white
@@ -67,7 +66,7 @@ class SearchTableViewController: UITableViewController {
         return self.fetchedhResultController.sections?[section].numberOfObjects ?? 0
     }
     
-    // Query cityName and display the result
+    /// Query cityName and display the result
     func filterList(searchText: String) {
         self.searchText = searchText
         let searchPredicate = NSPredicate(format: "cityName CONTAINS[C] %@", searchText)
@@ -85,6 +84,7 @@ class SearchTableViewController: UITableViewController {
         }
     }
 
+    /// Adding a label to show the user saying "No Cities found!"
     func noResultFound() {
         self.errorLabel = UILabel(frame: CGRect(x: 0, y: 60, width: self.tableView.frame.size.width, height: 100))
         errorLabel.text = constant.noCities
@@ -117,6 +117,7 @@ class SearchTableViewController: UITableViewController {
         }
     }
     
+    /// Highlights the user inputed text Bold on the searched list
     func getAttributedText(city: String, searchText: String) -> NSAttributedString {
         let range:NSRange = (city as NSString).range(of: searchText)
         let attText = NSMutableAttributedString(string: city)
